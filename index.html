@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>*Node</title>
+<style>
+table, th, td {
+    border: 1px solid black;
+    text-align :center;
+}
+</style>
+<style>
+.wrap {
+    width: 300px;
+    height:100px;
+    padding: 0;
+    overflow: hidden;
+}
+.frame {
+    width: 1024px;
+    height:640px;
+    border: 0;
+    -ms-transform: scale(.75);
+    -moz-transform: scale(.75);
+    -o-transform: scale(.75);
+    -webkit-transform: scale(.75);
+    transform: scale(.75);
+    
+    -ms-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+</style>
+</head>
+<body>
+<script>
+p_1=0;
+pp=1;
+//function rotate(pp) {
+function rotate() {
+	if (pp==1){
+		document.getElementById("p1").src="red.png";
+		document.getElementById("p2").src="green.png";
+		document.getElementById("p3").src="green.png";
+//		document.getElementById("p2").style.display="none";
+//		document.getElementById("p3").style.display="none";
+		pp=2;
+	}
+	else if (pp==2){
+		document.getElementById("p2").src="red.png";
+		document.getElementById("p1").src="green.png";
+		document.getElementById("p3").src="green.png";
+//		document.getElementById("p1").style.display="none";
+//		document.getElementById("p3").style.display="none";
+		pp=3;
+
+	}
+	else if (pp==3){
+		document.getElementById("p3").src="red.png";
+		document.getElementById("p2").src="green.png";
+		document.getElementById("p1").src="green.png";
+//		document.getElementById("p1").style.display="none";
+//		document.getElementById("p2").style.display="none";
+		pp=1;
+	}
+}
+</script>
+<script>
+function step_m() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "step_m.php", true);
+  xhttp.send();
+  document.getElementById("zero").innerHTML = "20";
+}
+
+function step_p() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "step_p.php", true);
+  xhttp.send();
+}
+</script>
+<script type="text/javascript">
+//function acquire_position {
+function acquire_position() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("zero").innerHTML=this.responseText;
+      p=this.responseText;
+      console.log(p);
+      console.log(p_1);
+//      p_1=p;
+      if ( p != p_1){
+	rotate();
+	p_1=p;
+      }
+//      document.getElementById("zero").value=this.responseText;
+    }
+  };
+  xhttp.open("GET", "pos.php", true);
+  xhttp.send();
+}
+setInterval(acquire_position, 250);
+
+</script>
+<table style="width:70%" align="center" bgcolor="#D3D3D3">
+  <tr>
+    <th><h1>* Node</h1><h6>(Pointer node)</h6></th>
+  </tr>
+   <table style ="width:70%" align="center" bgcolor="#D3D3D3">
+   <th></th>
+  <table style ="width:70%" align="center" bgcolor="#D3D3D3">
+  <tr>
+    <td style ="width:25%"><b>Direzione di Puntamento<br></b>(NORD 0&#176 00')<h1><div id="zero"></h1>
+    <image id="p1" src="green.png"   style="width:10px;height:10px;"  />
+    <image id="p2" src="green.png"   style="width:20px;height:10px;"  />
+    <image id="p3" src="green.png"   style="width:10px;height:10px;"/></div></td>
+   <td style ="width:25%"><div id="uno"><button type="button">Ricerca Zero</button></div></td></tr>
+   <tr> 
+    <td style ="width:25%"><b>Rotate</b><div id="due"><iframe width="100%" frameborder="0" height="100%" src="motor.php"></iframe></div>
+    </td>
+    <td style="width:25%"><b>OffSet rispetto a Nord</b><div id="tre"><iframe width="100%" frameborder="0" height="100%" src="offset.php"></iframe></div>
+</td></tr><tr>
+    <td style ="width:25%"><div id="quattro"><iframe width="100%" frameborder="0" height="300" src="http://ubnt:ubnt@10.150.28.25/signal_gui.cgi" scrolling="no"></iframe></div></td>
+<!--    <td style="width:25%"><iframe  src="http://ubnt:ubnt@192.168.100.10/signal_gui.cgi" width="100%" frameborder="0" scrolling="auto"></iframe></td>-->
+    <!--<td style ="width:25%"><div id="cinque"></div></td></tr>--><tr>
+    <td style ="width:25%"><div id="sei"> <button onclick="step_p()">STEP +</button> </div></td>
+<!--    <td style ="width:25%"><div id="sei"><iframe width="100%" frameborder="0" height="60" src="stepp.php"></iframe></div>
+    <td style ="width:25%"><div id="sette"><iframe width="100%" frameborder="0" height="60" src="stepm.php"></iframe></div>-->
+    <td style ="width:25%"><div id="sette"> <button onclick="step_m()">STEP -</button></div></td>
+  </tr>
+</table>
+</table>
+</table>
+</table>
+</body>
+</html>
