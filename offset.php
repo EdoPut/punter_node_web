@@ -21,28 +21,10 @@ function read_offset (){
         $offset[1]=$p;
         return ($offset);
 }
-function read_pos (){
-        exec("cat /var/www/html/node/pos.dat",$pos);
-        $offset[0]=round(($offset[0])*0.0878906,4);
-        $g=round($offset[0]);
-        $p=($offset[0]-intval($offset[0]))*60;
-        $p=intval($p);
-        $offset[0]=$g;
-        $offset[1]=$p;
-        return ($offset);
-}
 ?>
 <body>
-<body>
 <?php
-//        $pos=read_pos();
         $of=read_offset();
-//        $pos=read_pos();
-/*      echo "pos :";
-        var_dump($pos);
-        echo "<br>offset :";
-        var_dump($of);
-*/
 ?>
 <table  align="center" border="5">
 <th>

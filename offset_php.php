@@ -12,7 +12,6 @@ echo $primi."<br>";
 $step=(int)(($gradi+$primi/60)/0.0878906);
 echo $step."<br>";
 exec("echo '".$step."' > /var/www/html/node/offset.dat");
-//echo '<a href="./index.html" target="_parent"></a>';
 ?>
 <script type="text/javascript">
     window.parent.location.reload();
