@@ -17,11 +17,11 @@ $step= $step-$pos[0]-$of[0];
 echo $step,"<br>";
 if ($step > 0){
 	echo "positivo<br>";
-	exec("echo 'mov 150,".$step.",1' > /var/www/html/node/motor.tmp");
+	exec("echo 'mov 100,".$step.",1' > /var/www/html/node/motor.tmp");
 }
 else {
 	$step=abs($step);
-	exec("echo 'mov 150,".$step.",-1' > /var/www/html/node/motor.tmp");
+	exec("echo 'mov 100,".$step.",-1' > /var/www/html/node/motor.tmp");
 }
 exec("echo 'stop 0' >> /var/www/html/node/motor.tmp");
 exec("cp /var/www/html/node/motor.tmp /var/www/html/node/motor.mpp");

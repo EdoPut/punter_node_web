@@ -23,15 +23,11 @@ function read_pos (){
 	$ps=array();
 	exec("cat /var/www/html/node/offset.dat",$offset);
 	if ($_GET){
-		echo $_GET["gradi"];
-		echo $_GET["primi"];
         	array_push($ps,(($_GET["gradi"]+$_GET["primi"]/60)/0.0878906)-$offset[0]);
-//        	array_push($ps,$_GET["primi"]);
 	}
 	else {
 		exec("cat /var/www/html/node/pos.dat",$ps);
 	}
-	var_dump($ps);
 	$offset[0]=round(($ps[0]+$offset[0])*0.0878906,4);
 	$g=intval($offset[0]);
 	$p=($offset[0]-intval($offset[0]))*60;
